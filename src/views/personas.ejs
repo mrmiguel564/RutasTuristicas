@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<title>Pagina Administrador</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-teal.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<body>
+
+<div class="w3-sidebar w3-collapse w3-white w3-animate-left w3-large" style="z-index:3;width:300px;" id="mySidebar">
+
+<div class="w3-bar w3-black w3-center">
+  <a class="w3-bar-item w3-button" style="width:33.33%" href="javascript:void(0)" onclick="openNav('nav01')">
+  <i class="fa fa-bars w3-xlarge"></i></a>
+
+</div>
+
+<div class="w3-bar-block">
+  <a class="w3-button w3-hover-teal w3-hide-large w3-large w3-right" href="javascript:void(0)" onclick="w3_close()">×</a>
+  <a class="w3-bar-item w3-button w3-border-bottom w3-large" href="/admin">Vinoteca</a>
+  <a class="w3-bar-item w3-button" href="/admin/productos">productos</a>
+  <a class="w3-bar-item w3-button" href="/admin/personas">personas</a>
+  <a class="w3-bar-item w3-button" href="/admin/compras">compras</a>
+  <a class="w3-bar-item w3-button" href="/admin/sucursales">Sucursal</a>
+</div>
+</div>
+
+
+<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" id="myOverlay"></div>
+
+<div class="w3-main" style="margin-left:300px;"> 
+
+<div class="w3-top w3-theme w3-large w3-hide-large">
+  <i class="fa fa-bars w3-button w3-teal w3-xlarge" onclick="w3_open()"></i>
+</div>
+<!-- header  -->
+
+<header class="w3-container w3-blue w3-padding-32 w3-center">
+  <a href="/"><h1 class="w3-xxxlarge w3-padding-16 w3-black" >Vinoteca Admin </h1></a>
+</header>
+
+
+<div class="w3-container w3-padding w3-section w3-light-grey w3-center">
+  <h1 class="w3-xlarge">Agregar persona</h1>
+</div>
+
+
+  <div class="w3-row padding ">
+    <div class="w3-half w3-container">
+      <form action="/ingresa/personas" method="post" class="card-body">
+      <div class="input-group ">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+        <input id="correo" type="text" class="form-control" name="correo" placeholder="Correo de la persona">
+      </div>
+      <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+        <input id="nombre" type="text" class="w3-half w3- form-control" name="nombre" placeholder="Nombre de la persona">
+      </div>
+      <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+        <input id="password" type="text" class="w3-half w3- form-control" name="password" placeholder="contraseña de la persona">
+      </div>
+      <div class="input-group">
+        <label for="fecha_nacimiento">fecha nacimiento:</label>
+        <input type="date" id="fecha_nacimiento" name="fecha_nacimiento">
+      </div>
+      <label>Rol del usuario dentro de la pagina:</label><br>
+      <div class="w3-row padding">
+        <div class="w3-third ">
+          <input id="rol" class="w3-radio" type="radio" name="rol" value="cliente" checked>
+        <label>cliente</label>
+        <br>
+        </div>
+        <div class="w3-third">
+          <input id="rol" class="w3-radio" type="radio" name="rol" value="administrador" checked>
+          <label>administrador</label>
+          <br>
+        </div>
+      </div>
+      <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+        <input id="telefono" type="text" class="form-control" name="telefono" placeholder="Telefono">
+      </div>
+      <div class="input-group"></div>
+      <br>
+      <input type="submit" class="btn btn-primary" value="Confirmar" ></input>
+    
+      <a type="button" class="btn btn-default" href="/admin/personas" >Anular/Cancelar</a>
+    </form> 
+    </div>
+  
+</div>
+  
+  <div class="w3-container w3-padding w3-section w3-light-grey w3-center">
+    <h1 class="w3-xlarge">Eliminar/Modificar persona</h1>
+  </div>
+  <div class='col-md-6 mt-4 text-center'>
+    <table class='table table-striped'>
+        <tr>
+            <th>Correo</th>
+            <th>Nombre</th>
+            <th>password</th>
+            <th>fecha_nacimiento</th>
+            <th>rol</th>
+            <th>telefono</th>
+            <th>Eliminar </th>
+            <th>Modificar</th>
+        </tr>
+        <% for(var i = 0; i < datos.length; i++){ %>
+           <tr>
+               <td><%= datos[i].correo %> </td>
+               <td><%= datos[i].nombre %></td>
+               <td><%= datos[i].password %></td>
+               <td><%= datos[i].fecha_nacimiento %></td>
+               <td><%= datos[i].rol %></td>
+               <td><%= datos[i].telefono %></td>
+               <td>
+                  <form action="/eliminar1/<%=datos[i].correo%>"  method="get" class="card-body">
+                    <input type="submit" class="btn btn-danger" value="Eliminar" ></input>
+                </form>
+              </td>
+              <td>
+                <form action="/modificarPersonas/<%=datos[i].correo%>"  method="get" class="card-body">
+                  <input type="submit" class="btn btn-primary" value="Modificar" ></input>
+              </form> 
+              </td>
+           </tr> 
+        <% } %>
+    </table>
+</div>
+
+
+
+
+<br> 
+
+
+<script>
+function w3_open() {
+  document.getElementById("mySidebar").style.display = "block";
+  document.getElementById("myOverlay").style.display = "block";
+}
+
+function w3_close() {
+  document.getElementById("mySidebar").style.display = "none";
+  document.getElementById("myOverlay").style.display = "none";
+}
+
+openNav("nav01");
+function openNav(id) {
+  document.getElementById("nav01").style.display = "none";
+  document.getElementById("nav02").style.display = "none";
+  document.getElementById("nav03").style.display = "none";
+  document.getElementById(id).style.display = "block";
+}
+
+function myAccFunc() {
+      var x = document.getElementById("demoAcc");
+      if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+      } else {
+        x.className = x.className.replace(" w3-show", "");
+      }
+    }
+function getCorreo(correo){
+  var correito = correo;
+  return correito;
+}
+function openCity(evt, cityName) {
+      var i;
+      var x = document.getElementsByClassName("city");
+      for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";
+      }
+      var activebtn = document.getElementsByClassName("testbtn");
+      for (i = 0; i < x.length; i++) {
+        activebtn[i].className = activebtn[i].className.replace(" w3-theme-dark", "");
+      }
+      document.getElementById(cityName).style.display = "block";
+      evt.currentTarget.className += " w3-theme-dark";
+    }
+
+</script>
+
+<script src="https://www.w3schools.com/lib/w3codecolor.js"></script>
+
+<script>
+w3CodeColor();
+</script>
+
+</body>
+</html> 
