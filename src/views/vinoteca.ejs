@@ -29,6 +29,10 @@
   .mySlides {display:none}
 .w3-left, .w3-right, .w3-badge {cursor:pointer}
 .w3-badge {height:13px;width:13px;padding:0}
+#map {
+	height: 500px;
+	width: 100%;
+}
 </style>
 
 <body class="w3-content" style="max-width:1200px">
@@ -110,10 +114,18 @@
                             class="fa fa-remove w3-right w3-button w3-transparent w3-xlarge"></i>
 
                             <!-- APPI MAPS HERE -->
-                                            <p><%= datos[i].nombre %><br>
-                                            <b><%= datos[i].precio%></b><br>              
-                                            <b><%= datos[i].contenido%></b></p></p>
-                                            <img style="max-width:autopx;max-height:autopx" src="<%= datos[i].jpg %>">
+                            <div id="map" >
+                              <img src="https://maps.googleapis.com/maps/api/staticmap?
+                              center=Brooklyn+Bridge,New+York,NY
+                              &zoom=13
+                              &size=800x500
+                              &maptype=roadmap
+                              &markers=color:blue%7Clabel:S%7C40.702147,-74.015794
+                              &markers=color:green%7Clabel:G%7C40.711614,-74.012318
+                              &markers=color:red%7Clabel:C%7C40.718217,-73.998284
+                              &key=AIzaSyCeqP9RawiuGlNjM1d94-DiyJ7gYdf88Gc" >
+                            </div>
+                            
                         </div>
                       </div>
                     </div>
@@ -138,6 +150,9 @@
          
         <% } %>
       <% } %> 
+      <div id="map"></div>
+                            
+                            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCeqP9RawiuGlNjM1d94-DiyJ7gYdf88Gc&callback=iniciarMap"></script>
     </div>
   </div>  
     <div class="w3-black w3-center w3-padding-24">Powered by Grupo 3</div>
@@ -147,14 +162,20 @@
   <!-- script -->
 
   <script>
-     var myVideo = document.getElementById("video1"); 
+    function iniciarMap(){
+    var coord = {lat:-34.5956145 ,lng: -58.4431949};
+    var map = new google.maps.Map(document.getElementById('map'),{
+      zoom: 10,
+      center: coord
+    });
+    var marker = new google.maps.Marker({
+      position: coord,
+      map: map
+    });
+}
 
-function playPause() { 
-  if (myVideo.paused) 
-    myVideo.play(); 
-  else 
-    myVideo.pause(); 
-} 
+
+     
 
     var slideIndex = 1;
 showDivs(slideIndex);
@@ -225,6 +246,17 @@ function showDivs(n) {
     var mybtn = document.getElementsByClassName("testbtn")[0];
     mybtn.click();
 
+    function iniciarMap(){
+    var coord = {lat:-34.5956145 ,lng: -58.4431949};
+    var map = new google.maps.Map(document.getElementById('map'),{
+      zoom: 10,
+      center: coord
+    });
+    var marker = new google.maps.Marker({
+      position: coord,
+      map: map
+    });
+}
   </script>
 
 </body>
