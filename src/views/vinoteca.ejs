@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<title>Vinoteca Online</title>
+<title>placeholder  Online</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -84,23 +84,21 @@
     <div class="container w3-center" >
       <div class="row">
         <br> 
-      <% for(var i = 0; i < datos.length; i++){ %>
-        <% if(datos[i].activo){ %>
+      <% for(var i = 0; i < rutas.length; i++){ %>
+        <% if(rutas[i].Estado){ %>
          
              <div class="w3-col w3-container" style="max-width:210px;max-height:300px;">
               <div class="w3-hide-small w3-card-4 w3-center">
                 <div class="w3-hide-small w3-display-container w3-hover-opacity">
-                  <img style="max-width:178px;max-height:200px" src= "descarga.png">                    <!-- "<%= datos[i].jpg %> -->
+                  <img style="max-width:178px;max-height:200px" src= "<%= rutas[i].Material_visual%>">
                   <div class="w3-display-middle w3-display-hover">
-                    <button class="w3-button w3-black" onclick="document.getElementById(<%=i%>).style.display='block'" >Comprar ahora <i class="fa fa-shopping-cart" ></i></button>
+                    <button class="w3-button w3-black" onclick="document.getElementById(<%=i%>).style.display='block'" >Mas detalles </button>
                      
                    
                   
                   </div> 
                   <div class=" w3-center">
-                    <p><%= datos[i].nombre %><br>
-                    <b><%= datos[i].precio%></b><br>              
-                    <b><%= datos[i].contenido%></b></p>
+                    <p><%= rutas[i].Nombre %><br>
                   </div>
                 </div>
               </div>
@@ -120,10 +118,10 @@
                               &zoom=14
                               &size=2000x500
                               &maptype=roadmap
-                              &markers=color:blue%7Clabel:1%7C-33.607962070341244, -71.62424429006637  
-                              &markers=color:green%7Clabel:2%7C-33.60194890214756, -71.62421975422637
-                              &markers=color:red%7Clabel:3%7C-33.58656421600778, -71.61184566226882
-                              &key=AIzaSyCeqP9RawiuGlNjM1d94-DiyJ7gYdf88Gc" >
+                             
+                              &markers=color:blue%7Clabel:1%7C<%=puntos[1].Coord_X%>, <%=puntos[1].Coord_Y%>
+                              &markers=color:red%7Clabel:F%7C-33.58656421600778, -71.61184566226882
+                              &key=AIzaSyCeqP9RawiuGlNjM1d94-DiyJ7gYdf88Gc">
                             </div>
                             
                         </div>
@@ -133,13 +131,11 @@
 <!--               <div class="w3-hide-large w3-hide-medium w3-col w3-container" style="max-width:auto;max-height:300px;">
                 <div class=" w3-card-4 w3-center">
                 <div class="  w3-hide-medium w3-display-container w3-hover-opacity " >
-                  <a class="w3-button" onclick="document.getElementById('Form_compra').style.display='block'"><img style="max-width:138px;max-height:200px" src="<%= datos[i].jpg %>"> </a>
+                  <a class="w3-button" onclick="document.getElementById('Form_compra').style.display='block'"><img style="max-width:138px;max-height:200px" src="<%= rutas[i].jpg %>"> </a>
                   <div class="w3-display-middle w3-display-hover">
                     </div>
                   <div class=" w3-center">
-                    <p><%= datos[i].nombre %><br>
-                    <b><%= datos[i].precio%></b><br>              
-                    <b><%= datos[i].contenido%></b></p>
+
                   </div>
                 </div>
               </div>

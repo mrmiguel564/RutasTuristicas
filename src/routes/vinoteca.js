@@ -5,9 +5,13 @@ const conn = require('../database'); // Buscando el archivo de conf de la base d
 const multer = require('multer');
 
 router.get('/', (req,res) => {
-    conn.query('Select * from producto', (err,resp,campos) => {
-        //console.log(resp);
-        res.render('vinoteca.ejs',   { datos: resp });
+    conn.query('Select * from rutas', (err,resp,campos) => {
+        conn.query('Select ID, Numero_punto, Coord_X , Coord_Y, Icono, Direccion from puntos_turisticos', (err,resp1,campos) => {
+        
+            console.log(resp);
+            console.log(resp1);
+            res.render('vinoteca.ejs',   { rutas: resp, puntos: resp1 });
+        });
     });
 
 });
@@ -161,7 +165,7 @@ router.get('/modificarCompras/:id_compra', (req,res,next) => {
     });
 });
 
-router.get('/modificarProductos/:id_producto', (req,res,next) => {
+router.get('/modificarrutas/:id_ruta', (req,res,next) => {
     if(req.isAuthenticated()) return next();
     res.redirect('/login');
 
@@ -173,10 +177,10 @@ router.get('/modificarProductos/:id_producto', (req,res,next) => {
         res.redirect('/')
     }
     
-    const {id_producto} =  req.params;
-    conn.query('Select * from producto where id_producto = ?', [id_producto] , (err,resp,campos) => {
+    const {id_ruta} =  req.params;
+    conn.query('Select * from rutas where id_ruta = ?', [id_ruta] , (err,resp,campos) => {
         //console.log(resp);
-        res.render('ModificarProductos.ejs',   { datos: resp });
+        res.render('Modificarrutas.ejs',   { datos: resp });
     });
 });
 
@@ -199,24 +203,6 @@ router.get('/modificarPersonas/:correo', (req,res,next) => {
     });
 });
 
-router.get('/modificarSucursal/:nombre', (req,res,next) => {
-    if(req.isAuthenticated()) return next();
-    res.redirect('/login');
-
-    //res.render('index.ejs');
-    },(req,res,err) =>{
-    let op = require("../index.js")
-    let tipo_usuario = op.rol1;
-    if(tipo_usuario==="cliente"){
-        res.redirect('/')
-    }
-    
-    const {nombre} =  req.params;
-    conn.query('Select * from sucursal where nombre = ?', [nombre] , (err,resp,campos) => {
-        //console.log(resp);
-        res.render('ModificarSucursal.ejs',   { datos: resp });
-    });
-});
 
 router.get('/admin', (req,res,next) => {
     if(req.isAuthenticated()) return next();
@@ -230,12 +216,12 @@ router.get('/admin', (req,res,next) => {
         res.redirect('/')
     }
     
-    conn.query('SELECT usuario.correo, Count(producto_carrito.id_producto) AS NumeroPedidos FROM producto_carrito LEFT JOIN usuario ON producto_carrito.correo=usuario.correo GROUP BY usuario.nombre', (err,resp,campos) => {
-        conn.query('SELECT MIN(producto.precio) as MenorPrecio from producto join stock on producto.id_producto = stock.id_producto', (err,resp1,campos) => {
-            conn.query('SELECT MAX(producto.precio) as MayorPrecio from producto join stock on producto.id_producto = stock.id_producto', (err,resp2,campos) => {
-                conn.query('SELECT AVG(producto.precio) as ElPromedioDeLosPrecios from producto join stock on producto.id_producto = stock.id_producto', (err,resp3,campos) => {
-                    conn.query('select * , max(cantidad_producto) as ProductoMaximo from (producto_carrito INNER JOIN producto)', (err,resp4,campos) => { 
-                        conn.query('SELECT * FROM producto WHERE id_producto NOT IN (SELECT id_producto FROM productos_compra)', (err,resp5,campos) => {     
+    conn.query('SELECT usuario.correo, Count(ruta_carrito.id_ruta) AS NumeroPedidos FROM ruta_carrito LEFT JOIN usuario ON ruta_carrito.correo=usuario.correo GROUP BY usuario.nombre', (err,resp,campos) => {
+        conn.query('SELECT MIN(rutas.precio) as MenorPrecio from rutas join stock on rutas.id_ruta = stock.id_ruta', (err,resp1,campos) => {
+            conn.query('SELECT MAX(rutas.precio) as MayorPrecio from rutas join stock on rutas.id_ruta = stock.id_ruta', (err,resp2,campos) => {
+                conn.query('SELECT AVG(rutas.precio) as ElPromedioDeLosPrecios from rutas join stock on rutas.id_ruta = stock.id_ruta', (err,resp3,campos) => {
+                    conn.query('select * , max(cantidad_ruta) as rutaMaximo from (ruta_carrito INNER JOIN rutas)', (err,resp4,campos) => { 
+                        conn.query('SELECT * FROM rutas WHERE id_ruta NOT IN (SELECT id_ruta FROM rutas_compra)', (err,resp5,campos) => {     
                      res.render('admin.ejs',   { datos: resp, datos1: resp1, datos2: resp2, datos3: resp3, datos4: resp4, datos5:resp5});
                 });
             });
@@ -247,7 +233,7 @@ router.get('/admin', (req,res,next) => {
     
 });
 
-router.get('/admin/productos', (req,res,next) => {
+router.get('/admin/rutas', (req,res,next) => {
     if(req.isAuthenticated()) return next();
     res.redirect('/login');
 
@@ -259,9 +245,9 @@ router.get('/admin/productos', (req,res,next) => {
         res.redirect('/')
     }
     
-    conn.query('Select * from producto', (err,resp,campos) => {
+    conn.query('Select * from rutas', (err,resp,campos) => {
         //console.log(resp);
-        res.render('productos.ejs',   { datos: resp });
+        res.render('rutas.ejs',   { datos: resp });
     });
 });
 
@@ -283,46 +269,15 @@ router.get('/admin/personas', (req,res,next) => {
     });
 });
 
-router.get('/admin/compras', (req,res,next) => {
-    if(req.isAuthenticated()) return next();
-    res.redirect('/login');
 
-    //res.render('index.ejs');
-    },(req,res,err) =>{
-    let op = require("../index.js")
-    let tipo_usuario = op.rol1;
-    if(tipo_usuario==="cliente"){
-        res.redirect('/')
-    }
- 
-    conn.query('Select * from compra', (err,resp,campos) => {
-        //console.log(resp);
-        res.render('compras.ejs',   { datos: resp });
-    });
-});
 
-router.get('/admin/sucursales', (req,res,next) => {
-    if(req.isAuthenticated()) return next();
-    res.redirect('/login');
 
-    //res.render('index.ejs');
-    },(req,res,err) =>{
-    let op = require("../index.js")
-    let tipo_usuario = op.rol1;
-    if(tipo_usuario==="cliente"){
-        res.redirect('/')
-    }
- 
-    conn.query('Select * from sucursal', (err,resp,campos) => {
-        //console.log(resp);
-        res.render('Sucursal.ejs',   { datos: resp });
-    });
-});
+
 router.get('/login', (req,res) => {
     res.render('login.ejs',{title: 'chequeo del login'});
 });
 
-router.get('/eliminar/:id_producto', (req,res,next) =>{
+router.get('/eliminar/:id_ruta', (req,res,next) =>{
 
     if(req.isAuthenticated()) return next();
     res.redirect('/login');
@@ -335,11 +290,11 @@ router.get('/eliminar/:id_producto', (req,res,next) =>{
         res.redirect('/')
     }
   
-    const { id_producto } = req.params;
-    conn.query('DELETE from producto WHERE id_producto = ?', [id_producto], (err, resp, campos) => {
+    const { id_ruta } = req.params;
+    conn.query('DELETE from rutas WHERE id_ruta = ?', [id_ruta], (err, resp, campos) => {
         if(!err){
-            console.log("producto eliminado")
-            res.redirect('/admin/productos')
+            console.log("rutas eliminado")
+            res.redirect('/admin/rutas')
         }else{
             console.log(err);
         }
@@ -347,112 +302,7 @@ router.get('/eliminar/:id_producto', (req,res,next) =>{
 });
 
 
-router.post('/precio',(req,res) =>{
-    
-    //const { dinero } = req.params;
-    const prueba = req.body;
-    //console.log(prueba)
-    conn.query('select producto.nombre, producto.jpg, producto.activo, producto.precio from producto join stock on producto.id_producto = stock.id_producto GROUP BY producto.id_producto having producto.precio > ? ', [prueba.precio], (err, resp, campos) => {
-        console.log( resp)
-        res.render('vinoteca.ejs',   { datos: resp });
-    });
-});
-
-router.post('/preciosRangos', (req,res) =>{
-        
-    var {RangoMenor,RangoMayor} = datitos =  req.body;
-    if(RangoMayor==''){
-        datitos.RangoMayor=999999;
-       
-    }
-    
-    conn.query('select producto.nombre, producto.jpg, producto.activo, producto.precio from producto join stock on producto.id_producto = stock.id_producto GROUP by producto.id_producto having producto.precio BETWEEN ? and ?', [datitos.RangoMenor, datitos.RangoMayor], (err, resp, campos) => {
-            res.render('vinoteca.ejs',   { datos: resp });
-    });
-});
-router.get('/eliminar1/:correo', (req,res,next) =>{
-    if(req.isAuthenticated()) return next();
-    res.redirect('/login');
-
-    //res.render('index.ejs');
-    },(req,res,err) =>{
-    let op = require("../index.js")
-    let tipo_usuario = op.rol1;
-    if(tipo_usuario==="cliente"){
-        res.redirect('/')
-    }
-  
-    const { correo } = req.params;
-    conn.query('DELETE from usuario WHERE correo = ?', [correo], (err, resp, campos) => {
-        if(!err){
-            console.log("persona eliminada")
-            res.redirect('/admin/personas')
-        }else{
-            console.log(err);
-        }
-    });
-});
-
-router.get('/eliminar2/:id_compra', (req,res,next) =>{
-
-    if(req.isAuthenticated()) return next();
-    res.redirect('/login');
-
-    //res.render('index.ejs');
-    },(req,res,err) =>{
-    let op = require("../index.js")
-    let tipo_usuario = op.rol1;
-    if(tipo_usuario==="cliente"){
-        res.redirect('/')
-    }
-
-    const { id_compra } = req.params;
-    conn.query('DELETE from compra WHERE id_compra = ?', [id_compra], (err, resp, campos) => {
-        if(!err){
-            console.log("persona eliminada")
-            res.redirect('/admin/compras')
-        }else{
-            console.log(err);
-        }
-    });
-});
-
-router.get('/eliminar3/:nombre', (req,res,next) =>{
-
-    if(req.isAuthenticated()) return next();
-    res.redirect('/login');
-
-    //res.render('index.ejs');
-    },(req,res,err) =>{
-    let op = require("../index.js")
-    let tipo_usuario = op.rol1;
-    if(tipo_usuario==="cliente"){
-        res.redirect('/')
-    }
-
-    const { nombre } = req.params;
-    conn.query('DELETE from sucursal WHERE nombre = ?', [nombre], (err, resp, campos) => {
-        if(!err){
-            console.log("sucursal eliminada")
-            res.redirect('/admin/sucursales')
-        }else{
-            console.log(err);
-        }
-    });
-});
-
-//router.post('/ingresar', (req,res) =>{
-//    
-//    conn.query('INSERT into producto VALUES ?', post , (err, resp, campos) => {
-//        if(!err){
-//            res.redirect('/admin')
-//        }else{
-//            console.log(err);
-//        }
-//    });
-//});
-
-router.post('/ingresa/productos', (req, res,next) => {
+router.post('/ingresa/rutas', (req, res,next) => {
         
     //console.log(req.files[0].filename);
 
@@ -471,16 +321,15 @@ router.post('/ingresa/productos', (req, res,next) => {
     }
   
     const {nombre, precio, activo, descripcion, jpg} = req.body;
-    conn.query('INSERT into producto SET? ',{
+    conn.query('INSERT into rutas SET? ',{
         nombre: nombre,
-        precio: precio,
-        activo: activo,
+        Estado: Estado,
         descripcion : descripcion,
         jpg         : req.files[0].filename,
     
     }, (err, result) => {
         if(!err) {
-            res.redirect('/admin/productos');
+            res.redirect('/admin/rutas');
             console.log("Datos agregados con exito");
             console.log(result);
         } else {
@@ -524,7 +373,7 @@ router.post('/ingresa/personas',(req, res, next) => {
     });
 });
 
-router.post('/ingresa/sucursal',(req, res, next) => {
+/* router.post('/ingresa/sucursal',(req, res, next) => {
 
     if(req.isAuthenticated()) return next();
     res.redirect('/login');
@@ -552,8 +401,8 @@ router.post('/ingresa/sucursal',(req, res, next) => {
             console.log(err);
         }
     });
-});
-
+}); */
+/* 
 router.post('/ingresa/compras',(req, res,next) => {
 
     if(req.isAuthenticated()) return next();
@@ -578,9 +427,9 @@ router.post('/ingresa/compras',(req, res,next) => {
             console.log(err);
         }
     });
-});
+}); */
 
-router.post('/modificar2/:id_compra', (req,res,next) =>{
+/* router.post('/modificar2/:id_compra', (req,res,next) =>{
 
     if(req.isAuthenticated()) return next();
     res.redirect('/login');
@@ -603,9 +452,9 @@ router.post('/modificar2/:id_compra', (req,res,next) =>{
             console.log(err);
         }
     });
-});
+}); */
 
-router.post('/modificar3/:id_producto', (req,res,next) =>{
+router.post('/modificar3/:id_ruta', (req,res,next) =>{
 
     if(req.isAuthenticated()) return next();
     res.redirect('/login');
@@ -619,11 +468,11 @@ router.post('/modificar3/:id_producto', (req,res,next) =>{
     }
     
     const {nombre, precio, activo, descripcion, jpg }= datitos =  req.body;
-    const {id_producto} = req.params;
-    conn.query('UPDATE producto SET? WHERE id_producto = ?', [datitos, req.params.id_producto], (err, resp, campos) => {
+    const {id_ruta} = req.params;
+    conn.query('UPDATE rutas SET? WHERE id_ruta = ?', [datitos, req.params.id_ruta], (err, resp, campos) => {
         if(!err){
-            console.log("Producto actualizado")
-            res.redirect('/admin/productos')
+            console.log("rutas actualizado")
+            res.redirect('/admin/rutas')
         }else{
             console.log(err);
         }
