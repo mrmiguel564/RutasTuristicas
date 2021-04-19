@@ -4,6 +4,16 @@ const router = express.Router();
 const conn = require('../database'); // Buscando el archivo de conf de la base de datos
 const multer = require('multer');
 
+
+
+
+router.get('/Getrutas/:id_ruta',(req,res) =>{
+    const{id_ruta} = req.params
+    conn.query('Select * from puntos_turisticos where ID = ?',  [id_ruta], (err,resp,campos) => {
+        console.log(resp);
+    });
+});
+
 router.get('/', (req,res) => {
     conn.query('Select * from rutas', (err,resp,campos) => {
         conn.query('Select ID, Numero_punto, Coord_X , Coord_Y, Icono, Direccion from puntos_turisticos', (err,resp1,campos) => {
