@@ -18,8 +18,8 @@
 
 <div class="w3-bar-block">
   <a class="w3-button w3-hover-teal w3-hide-large w3-large w3-right" href="javascript:void(0)" onclick="w3_close()">×</a>
-  <a class="w3-bar-item w3-button w3-border-bottom w3-large" href="/admin">placeholder</a>
-  <a class="w3-bar-item w3-button" href="/admin/productos">productos</a>
+  <a class="w3-bar-item w3-button w3-border-bottom w3-large" href="/admin">Administracion</a>
+  <a class="w3-bar-item w3-button" href="/Ingresorutas">Ingreso rutas</a>
 
 </div>
 </div>
@@ -35,12 +35,12 @@
 <!-- header  -->
 
 <header class="w3-container w3-blue w3-padding-32 w3-center">
-  <a href="/"><h1 class="w3-xxxlarge w3-padding-16 w3-black" >Placeholder Admin </h1></a>
+  <a href="/"><h1 class="w3-xxxlarge w3-padding-16 w3-black" >Administracion Turismo SA </h1></a>
 </header>
 
 
 <div class="w3-container w3-padding w3-section w3-light-grey w3-center">
-  <h1 class="w3-xlarge">Estadisticas</h1>
+  <h1 class="w3-xlarge">Solicitudes y estado de rutas</h1>
 </div>
 
 <div class='col-md-6 mt-4'>
@@ -62,12 +62,13 @@
     </div>
     <div class='col-md-6 mt-4'>
       <table class="w3-table-all w3-centered w3-card-4">
-          <h3>Producto mas vendido</h3>
+          <h3>Rutas Activas</h3>
            <tr class="w3-blue">
-                <th>Numero de ventas</th>
-                <th>Id</th>
+                <th>ID</th>
                 <th>Nombre</th>
-                <th>Imagen</th>
+                <th>Estado</th>
+                <th>Descripcion</th>
+                <th>Visual</th>
             </tr>
 
              
@@ -79,12 +80,13 @@
 
     <div class='col-md-6 mt-4 w3-striped '>
       <table class="w3-table-all w3-centered w3-card-4">
-        <h3>Productos no vendidos</h3>
+        <h3>Rutas no activas</h3>
         <tr class="w3-blue">                    
-          <th>id</th>
+          <th>ID</th>
           <th>Nombre</th>
-          <th>precio</th>
-          <th>Imagen</th>
+          <th>Estado</th>
+          <th>Descripcion</th>
+          <th>Visual</th>
         </tr>
          
       </table> 

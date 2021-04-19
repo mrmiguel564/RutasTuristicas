@@ -399,6 +399,42 @@ router.post('/ingresa/personas',(req, res, next) => {
     });
 });
 
+//Ingreso RUTAS Y CUALQUIER COSA QUE TENGA QUE VER CON LA PAG MODIFICAR ELIMINAR!!!
+router.post('/ingresorutas',(req, res,next) => {
+    const {Nombre,Descripcion,Material_visual}=req.body;
+    conn.query('insert into rutas SET?',{
+        Nombre:Nombre,
+        Descripcion:Descripcion,
+        Material_visual:Material_visual
+       
+    },(err,resp,campos) =>{
+        if(!err) {
+            res.redirect('/');
+          } else {
+            console.log(err);
+          }
+    });
+});
+router.post('/ingresopuntos',(req, res,next) => {
+    const {Numero_punto,Nombre,Coord_X,Coord_Y,Descripcion,Icono,Direccion}=req.body;
+    conn.query('insert into puntos_turisticos SET? ',{
+        Numero_punto:Numero_punto,
+        Nombre:Nombre,
+        Coord_X:Coord_X,
+        Coord_Y:Coord_Y,
+        Descripcion:Descripcion,
+        Icono:Icono,
+        Direccion:Direccion
+       
+    },(err,resp,campos) =>{
+        if(!err) {
+            res.redirect('/ingresorutas');
+          } else {
+            console.log(err);
+          }
+    });
+});
+
 /* router.post('/ingresa/sucursal',(req, res, next) => {
 
     if(req.isAuthenticated()) return next();
@@ -553,6 +589,11 @@ router.post('/modificar5/:nombre', (req,res,next) =>{
             console.log(err);
         }
     });
+});
+
+router.get('/ingresorutas' ,(req,res) =>{
+    res.render('ingresorutas.ejs');
+
 });
 
 module.exports = router;
