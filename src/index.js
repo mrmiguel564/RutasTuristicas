@@ -43,41 +43,30 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new PassportLocal(function(username,password,done){
-     conn.query('Select * from usuario where correo = ? and password = ?', [username, password], (err,resp,campos) =>{
-          try{
-               var user;
-               var pass;
-               var rol;
-                if(resp===null){
-                     user= "asd";
-                     pass ="asd";
-                }else{
-                     user = resp[0].correo;
-                     pass = resp[0].password;
-                     rol  = resp[0].rol;
-                     module.exports = {
-                          rol1: rol,
-                     }
-                }
-            if(username === user && password ===pass){
-                 console.log("entre aqui")
-                 return done(null,{id:resp[0].correo, name: resp[0].nombre});
-                
-            }
-           }catch(e){
-                console.log("no tengo nada")
-                done(null,false);
-                
-           }
-
-
-          //if(username === "programacionweb" && password === "987654321")
-    
-     //return done(null,{id:1, name: "Manuel"});
-
-     //done(null,false);
-     });
-}));
+     conn.query('select * From admin Where Usuario=? and Contraseña=?',[username,password],(err,resp,campos)=>{
+     try{ 
+         var user;
+         var pass;
+ 
+         if(resp==null){
+             user="xdxd";
+             pass="xdxd";
+         }
+         else{
+             user = resp[0].Usuario;
+             pass = resp[0].Contraseña;
+         }
+ 
+     if(username === user && password === pass){
+         console.log(resp);
+      return done(null,{id:resp[0].Usuario, name: resp[0].Usuario});
+     }
+ }catch(e){
+     done(null,false);
+ }})
+     
+      
+ }));
 
 
     

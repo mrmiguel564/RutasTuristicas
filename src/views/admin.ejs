@@ -45,47 +45,9 @@
 
 <div class='col-md-6 mt-4'>
 
-  <div class='w3-striped'>
-    <table class="w3-table-all w3-centered w3-card-4">
-      <h3>Cliente con mayor numero de compras</h3>
-      <tr class="w3-blue">
-            <th>Correo</th>
-            <th>Numero Pedidos</th>
-        </tr>
-        <% for(var i = 0; i < datos.length; i++){ %>
-            <tr>
-             <td><%=datos[i].correo%></td>
-             <td><%=datos[i].NumeroPedidos%></td>
-            </tr>
-        <% } %>
-    </table>
-  </div>
+  
 
-    <div class='w3-striped'>
-      <table class="w3-table-all w3-centered w3-card-4">
-        <h3>estadisticas generales de los productos</h3>
-        <tr class="w3-blue">
-              <th>Menor precio productos</th>
-              <th>Mayor precio Productos</th>
-              <th>El promedio de los productos</th>
-          </tr>
-          <% for(var i = 0; i < datos1.length; i++){ %>
-              <tr>
-               <td><%=datos1[i].MenorPrecio%></td>
-              
-          <% } %>
-          <% for(var i = 0; i < datos2.length; i++){ %>
-            
-             <td><%=datos2[i].MayorPrecio%></td>
-            
-        <% } %>
-        <% for(var i = 0; i < datos3.length; i++){ %>
-          
-           <td><%=datos3[i].ElPromedioDeLosPrecios%></td>
-          </tr>
-      <% } %>
-      </table>
-    </div>
+    
     
     <br>
 
@@ -108,14 +70,7 @@
                 <th>Imagen</th>
             </tr>
 
-            <% for(var i = 0; i < datos4.length; i++){ %>
-                <tr>
-                 <td><%=datos4[i].ProductoMaximo%></td>
-                 <td><%=datos4[i].id_producto%></td>
-                 <td><%=datos4[i].nombre%></td>
-                 <td ><img style="max-width:50%;max-height:50px" src= "<%=datos4[i].jpg%>" ></td>
-                </tr>
-             <% } %>     
+             
          </table>        
         </div>
 
@@ -131,14 +86,7 @@
           <th>precio</th>
           <th>Imagen</th>
         </tr>
-          <% for(var i = 0; i < datos5.length; i++){ %>
-            <tr> 
-            <td><%=datos5[i].id_producto%></td>
-            <td><%=datos5[i].nombre%></td>
-            <td><%=datos5[i].precio%></td>
-            <td ><img style="max-width:50%;max-height:50px" src= "<%=datos5[i].jpg%>" ></td>
-            </tr>
-          <% } %>
+         
       </table> 
      
     </div>

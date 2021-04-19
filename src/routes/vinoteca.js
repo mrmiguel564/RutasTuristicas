@@ -136,26 +136,42 @@ router.post('/registrarUsuario',(req,res) =>{
     });
 });
 
-router.post('/login',passport.authenticate('local',{  
-    successRedirect: "/listo",
+// router.post('/login',passport.authenticate('local',{  
+//     successRedirect: "/listo",
+//     failureRedirect: "/login"
+// }));
+
+// router.get('/listo/', (req,res,next)=>{
+//     if(req.isAuthenticated()) return next();
+    
+//     res.redirect('/login');
+// },(req,res) =>{
+    
+//     let op = require("../index.js")
+//     let tipo_usuario = op.rol1;
+//     if(tipo_usuario==="administrador"){
+//         res.redirect('/admin');
+//     }else if(tipo_usuario==="cliente"){
+//         res.redirect('/');
+//     }   
+// });
+router.get('/login', (req,res) =>{
+    res.render('login.ejs');
+});
+
+router.post('/login',passport.authenticate('local',{
+    successRedirect: "/correcto",
     failureRedirect: "/login"
 }));
 
-router.get('/listo/', (req,res,next)=>{
-    if(req.isAuthenticated()) return next();
-    
+router.get('/correcto', (req,res,next)=>{
+    if(req.isAuthenticated()) return next();   
     res.redirect('/login');
 },(req,res) =>{
-    
-    let op = require("../index.js")
-    let tipo_usuario = op.rol1;
-    if(tipo_usuario==="administrador"){
-        res.redirect('/admin');
-    }else if(tipo_usuario==="cliente"){
-        res.redirect('/');
-    }   
+    res.render('admin.ejs');
 });
 
+module.exports = router;
 router.get('/modificarCompras/:id_compra', (req,res,next) => {
     if(req.isAuthenticated()) return next();
     res.redirect('/login');
