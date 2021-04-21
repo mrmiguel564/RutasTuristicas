@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<title>Pagina Administrador</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-teal.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<body>
+
+<div class="w3-sidebar w3-collapse w3-white w3-animate-left w3-large" style="z-index:3;width:300px;" id="mySidebar">
+
+<div class="w3-bar w3-black w3-center">
+  <a class="w3-bar-item w3-button" style="width:33.33%" href="javascript:void(0)" onclick="openNav('nav01')">
+  <i class="fa fa-bars w3-xlarge"></i></a>
+
+</div>
+
+<div class="w3-bar-block">
+  <a class="w3-button w3-hover-teal w3-hide-large w3-large w3-right" href="javascript:void(0)" onclick="w3_close()">×</a>
+  <a class="w3-bar-item w3-button w3-border-bottom w3-large" href="/correcto">Administracion</a>
+  <a class="w3-bar-item w3-button" href="/Ingresorutas">Ingreso rutas</a>
+
+</div>
+</div>
+<!-- UwU -->
+
+<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" id="myOverlay"></div>
+
+<div class="w3-main" style="margin-left:300px;"> 
+
+<div class="w3-top w3-theme w3-large w3-hide-large">
+  <i class="fa fa-bars w3-button w3-teal w3-xlarge" onclick="w3_open()"></i>
+</div>
+<!-- header  -->
+
+<header class="w3-container w3-blue w3-padding-32 w3-center">
+  <a href="/"><h1 class="w3-xxxlarge w3-padding-16 w3-black" >Administracion Turismo SA </h1></a>
+</header>
+
+
+<div class="w3-container w3-padding w3-section w3-light-grey w3-center">
+  <h1 class="w3-xlarge">Solicitudes y estado de rutas</h1>
+</div>
+
+<div class='col-md-6 mt-4'>
+
+  
+
+    
+    
+    <br>
+
+     
+
+
+        <div class='col'>
+          <div class='col-md-1 mt-4 '>
+              <h2>Ruta</h2>
+              <table class='w3-table-all w3-centered w3-card-4'>
+                  <tr class="w3-blue">  
+                    <th>Estado</th>                    
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Descripcion</th>
+                    <th>Visual</th>
+                    
+                  </tr>
+                  <% for(var i = 0; i < datos.length; i++){ %>
+                     <tr>
+                         <td><%= datos[i].Estado %></td>
+                         <td><%= datos[i].ID %> <% i %></td>
+                         <td><%= datos[i].Nombre %></td>
+                         <td><%= datos[i].Descripcion %></td>
+                         <td><%= datos[i].Material_visual %></td>
+                         
+                     </tr> 
+                  <% } %>
+              </table>
+              
+          </div>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <div class='col'>
+            <div class='col-md-1 mt-4 '>
+                <h2>Puntos turisticos</h2>
+                <table class='w3-table-all w3-centered w3-card-4'>
+                    <tr class="w3-blue">  
+                      <th>Numero de punto</th>                    
+                      <th>Nombre</th>
+                      <th>Coord X</th>
+                      <th>Coord Y</th>
+                      <th>Descripcion</th>
+                      <th>Icono</th>
+                      <th>Direccion</th>
+                      
+                    </tr>
+                    <% for(var i = 0; i < datos1.length; i++){ %>
+                       <tr>
+                           <td><%= datos1[i].Numero_punto %></td>
+                           <td><%= datos1[i].Nombre %> </td>
+                           <td><%= datos1[i].Coord_X %></td>
+                           <td><%= datos1[i].Coord_Y %></td>
+                           <td><%= datos1[i].Descripcion %></td>
+                           <td><%= datos1[i].Icono %></td>
+                           <td><%= datos1[i].Direccion %></td>
+                       </tr> 
+                    <% } %>
+                </table>
+                
+            </div>
+
+
+    
+     
+    </div>
+
+
+
+
+<script>
+function w3_open() {
+  document.getElementById("mySidebar").style.display = "block";
+  document.getElementById("myOverlay").style.display = "block";
+}
+
+function w3_close() {
+  document.getElementById("mySidebar").style.display = "none";
+  document.getElementById("myOverlay").style.display = "none";
+}
+
+openNav("nav01");
+function openNav(id) {
+  document.getElementById("nav01").style.display = "none";
+  document.getElementById("nav02").style.display = "none";
+  document.getElementById("nav03").style.display = "none";
+  document.getElementById(id).style.display = "block";
+}
+
+</script>
+
+<script src="https://www.w3schools.com/lib/w3codecolor.js"></script>
+
+<script>
+w3CodeColor();
+</script>
+
+</body>
+</html> 
