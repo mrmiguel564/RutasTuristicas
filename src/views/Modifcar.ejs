@@ -59,7 +59,7 @@
                     <th>Visual</th>
                     <th></th>
                   </tr>
-                  <form action="/mostrar/<%= datos[0].ID %>" method="post">
+                  <form action="/modificarruta/<%= datos[0].ID %>" method="post">
                       <tr>
                       <td><%= datos[0].ID %> <% i %></td>
                       <td class="w3-container w3-left-align"> <input type="radio" id="Estado" name="Estado" <% if(datos[0].Estado == "Activa")    {%>checked<% } %> value="1">   <label for="male">activo</label>         <br>
