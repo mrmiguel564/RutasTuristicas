@@ -43,52 +43,45 @@
   <h1 class="w3-xlarge">Solicitudes y estado de rutas</h1>
 </div>
 
-<div class='col-md-6 mt-4'>
+<div class='w3-container'>
 
-  
-
-    
-    
     <br>
 
-     
-
-
         <div class='col'>
-          <div class='col-md-1 mt-4 '>
+          <div class='row'>
               <h2>Ruta</h2>
               <table class='w3-table-all w3-centered w3-card-4'>
                   <tr class="w3-blue">  
-                    <th>Estado</th>                    
                     <th>ID</th>
+                    <th class="w3-container w3-left-align"> Estado</th>                    
                     <th>Nombre</th>
                     <th>Descripcion</th>
                     <th>Visual</th>
-                    
+                    <th></th>
                   </tr>
-                  <% for(var i = 0; i < datos.length; i++){ %>
+                  <form action="modificarRuta" method="post">
+                  
                      <tr>
-                         <td><%= datos[i].Estado %></td>
-                         <td><%= datos[i].ID %> <% i %></td>
-                         <td><%= datos[i].Nombre %></td>
-                         <td><%= datos[i].Descripcion %></td>
-                         <td><%= datos[i].Material_visual %></td>
+                      <td><%= datos[0].ID %> <% i %></td>
+                     
+                      <td class="w3-container w3-left-align"><input  type="radio" id="Estado" name="gender" value="1">     <label for="male">activo</label> <br>
+                      <input type="radio" id="Estado" name="gender" value="2">   <label for="female">desactivado</label>
+                      <!-- <input id="Estado" type="text" class="form-control" value="<%=datos[0].Estado%>" name="Estado" placeholder="Estado"> -->
+                     </td>
+                      <td><input id="Nombre" type="text" class="form-control" value="<%= datos[0].Nombre %>" name="Nombre" placeholder="Nombre de la ruta"></td>
+                      <td><input id="Descripcion" type="text" class="form-control" value="<%= datos[0].Descripcion %>" name="Descripcion" placeholder="Descripcion"></td>
+                      <td><input id="Material_visual" type="text" class="form-control" value="<%= datos[0].Material_visual %>" name="Material_visual" placeholder="Fotos/videos"></td>
+                      <td><input type="submit" value="Actualizar"></td>
                          
                      </tr> 
-                  <% } %>
+                  </form>
               </table>
               
           </div>
           <br>
-          <br>
-          <br>
-          <br>
-          <br>
-          <br>
-          <br>
-          <br>
+
           <div class='col'>
-            <div class='col-md-1 mt-4 '>
+            <div class='row'>
                 <h2>Puntos turisticos</h2>
                 <table class='w3-table-all w3-centered w3-card-4'>
                     <tr class="w3-blue">  

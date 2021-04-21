@@ -64,7 +64,6 @@
                     <th>Nombre</th>
                     <th>Descripcion</th>
                     <th>Visual</th>
-                    <th>Informacion De Puntos</th>
                     <th>Eliminar</th>
                     <th>Modificar</th>
                     
@@ -76,9 +75,8 @@
                          <td><%= datos[i].Nombre %></td>
                          <td><%= datos[i].Descripcion %></td>
                          <td><%= datos[i].Material_visual %></td>
-                         <td><a class="btn btn-outline-info" href="/puntost/<%= datos[i].ID %>" role="button">Ver Puntos</a></td>
                          <td><a class="btn btn-outline-info" href="/delete/<%= datos[i].ID %>" role="button">Eliminar</a></td>
-                         <td><a class="btn btn-outline-info" href="/modificar/<%= datos[i].ID %>" role="button">Modificar</a></td>
+                         <td><a class="btn btn-outline-info" href="/mostrar/<%= datos[i].ID %>" role="button">Modificar/mostrar</a></td>
                          
                      </tr> 
                   <% } %>

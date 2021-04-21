@@ -463,7 +463,7 @@ router.get('/correcto', (req,res,next) => {
 
 
     });
-    router.get('/modificar/:ID', (req,res,next)=>{
+    router.get('/mostrar/:ID', (req,res,next)=>{
         if(req.isAuthenticated()) return next();
         res.redirect('/login');
     },(req,res) => {
