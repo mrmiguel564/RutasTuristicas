@@ -59,19 +59,17 @@
                     <th>Visual</th>
                     <th></th>
                   </tr>
-                  <form action="modificarRuta" method="post">
-                  
-                     <tr>
+                  <form action="/mostrar/<%= datos[0].ID %>" method="post">
+                      <tr>
                       <td><%= datos[0].ID %> <% i %></td>
-                     
-                      <td class="w3-container w3-left-align"><input  type="radio" id="Estado" name="gender" value="1">     <label for="male">activo</label> <br>
-                      <input type="radio" id="Estado" name="gender" value="2">   <label for="female">desactivado</label>
+                      <td class="w3-container w3-left-align"> <input type="radio" id="Estado" name="Estado" <% if(datos[0].Estado == "Activa")    {%>checked<% } %> value="1">   <label for="male">activo</label>         <br>
+                                                              <input type="radio" id="Estado" name="Estado" <% if(datos[0].Estado == "No Activa") {%>checked<% } %> value="0">   <label for="female">desactivado</label>  </td>
                       <!-- <input id="Estado" type="text" class="form-control" value="<%=datos[0].Estado%>" name="Estado" placeholder="Estado"> -->
-                     </td>
+                     
                       <td><input id="Nombre" type="text" class="form-control" value="<%= datos[0].Nombre %>" name="Nombre" placeholder="Nombre de la ruta"></td>
                       <td><input id="Descripcion" type="text" class="form-control" value="<%= datos[0].Descripcion %>" name="Descripcion" placeholder="Descripcion"></td>
                       <td><input id="Material_visual" type="text" class="form-control" value="<%= datos[0].Material_visual %>" name="Material_visual" placeholder="Fotos/videos"></td>
-                      <td><input type="submit" value="Actualizar"></td>
+                      <td><input type="submit" value="Actualizar" href="/correcto"></td> 
                          
                      </tr> 
                   </form>
@@ -94,6 +92,7 @@
                       <th>Direccion</th>
                       
                     </tr>
+                    <form action="/mostrar/<%= datos[0].ID %>" method="post"></form>
                     <% for(var i = 0; i < datos1.length; i++){ %>
                        <tr>
                            <td><%= datos1[i].Numero_punto %></td>
@@ -106,12 +105,7 @@
                        </tr> 
                     <% } %>
                 </table>
-                
             </div>
-
-
-    
-     
     </div>
 
 
