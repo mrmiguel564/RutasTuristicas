@@ -175,11 +175,11 @@
           lista.push(punto);
         }
       }
-
+     
       document.getElementById('popup').style.display='block'
       document.getElementById('map').center.lat=X
       document.getElementById('map').center.lng=Y
-      initMap(X, Y)
+      
     }
 
 
@@ -191,10 +191,13 @@
     let map;
 
     function initMap(X, Y) {
+      var marker = new google.maps.Marker({position: [-33.5809,-71.6132]});
+      marker.setMap(map);
       map = new google.maps.Map(document.getElementById("map"), {
         center: { lat: -33.5809, lng: -71.6132 },     /* aqui debemos meter center x, y y ademas meter los marcadores esa es nuestra mision las weas estan en la BD pero nuestra mission es sacar desde alli */
         zoom: 14,
       });
+      marker.setMap(map);
     }
     
 
