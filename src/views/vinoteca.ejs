@@ -56,12 +56,7 @@
 
 
   <!-- Top menu on small screens -->
-  <header class="w3-bar w3-top w3-hide-large w3-black w3-xlarge">
-    <div class="w3-bar-item w3-padding-24 w3-wide">LOGO</div>
-    <a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding-24 w3-right" onclick="w3_open()"><i
-        class="fa fa-bars"></i></a>
-        
-  </header>
+  
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">Turismo SA</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -196,8 +191,8 @@
 
     function initMap(puntos) {
       map = new google.maps.Map(document.getElementById("map"), {
-        center: { lat: 1, lng: 1 },
-        zoom: 8,
+        center: { lat: -33.600993, lng: -71.606089 },
+        zoom: 14,
       });
     }
     

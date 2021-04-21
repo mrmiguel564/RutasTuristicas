@@ -18,8 +18,7 @@ router.get('/', (req,res) => {
     conn.query('Select * from rutas', (err,resp,campos) => {
         conn.query('Select ID, Numero_punto, Coord_X , Coord_Y, Icono, Direccion from puntos_turisticos', (err,resp1,campos) => {
         
-            console.log(resp);
-            console.log(resp1);
+
             res.render('vinoteca.ejs',   { rutas: resp, puntos: resp1 });
         });
     });
@@ -400,40 +399,57 @@ router.post('/ingresa/personas',(req, res, next) => {
 });
 
 //Ingreso RUTAS Y CUALQUIER COSA QUE TENGA QUE VER CON LA PAG MODIFICAR ELIMINAR!!!
+router.get('/ingresorutas', (req,res) => {
+    conn.query('Select * from rutas', (err,resp,campos) => {
+        conn.query('Select ID, Numero_punto, Coord_X , Coord_Y, Icono, Direccion from puntos_turisticos', (err,resp1,campos) => {
+        
+            console.log(resp);
+            console.log(resp1);
+            res.render('ingresorutas.ejs',   { rutas: resp, puntos: resp1 });
+        });
+    });
+
+});
 router.post('/ingresorutas',(req, res,next) => {
     const {Nombre,Descripcion,Material_visual}=req.body;
     conn.query('insert into rutas SET?',{
         Nombre:Nombre,
         Descripcion:Descripcion,
         Material_visual:Material_visual
-       
     },(err,resp,campos) =>{
         if(!err) {
-            res.redirect('/');
+            
+
+                console.log(resp);
+                console.log("xddd");
+                console.log(resp.insertId);
+                var sql = 'insert into puntos_turisticos(ID,Numero_punto,Coord_x,Coord_y,Nombre,Descripcion,Icono,Direccion) VALUES ?';
+                const {Numero_punto,Coord_x,Coord_y,NombreP,DescripcionP,Icono,Direccion}=req.body;
+                var values=[];
+                for(var i=0;i<Coord_x.length;i++){
+                    values.push([resp.insertId,Numero_punto[i],Coord_x[i],Coord_y[i],NombreP[i],DescripcionP[i],Icono[i],Direccion[i]])
+                };
+                console.log(values);
+                conn.query(sql,[values],function(err){
+                    console.log(err);
+                
+            
+            
+               
+            
+                    });
+                res.render("ingresorutas.ejs");
+
+           
           } else {
             console.log(err);
           }
-    });
+        
+    
 });
-router.post('/ingresopuntos',(req, res,next) => {
-    const {Numero_punto,Nombre,Coord_X,Coord_Y,Descripcion,Icono,Direccion}=req.body;
-    conn.query('insert into puntos_turisticos SET? ',{
-        Numero_punto:Numero_punto,
-        Nombre:Nombre,
-        Coord_X:Coord_X,
-        Coord_Y:Coord_Y,
-        Descripcion:Descripcion,
-        Icono:Icono,
-        Direccion:Direccion
-       
-    },(err,resp,campos) =>{
-        if(!err) {
-            res.redirect('/ingresorutas');
-          } else {
-            console.log(err);
-          }
-    });
 });
+
+
 
 /* router.post('/ingresa/sucursal',(req, res, next) => {
 
@@ -591,9 +607,6 @@ router.post('/modificar5/:nombre', (req,res,next) =>{
     });
 });
 
-router.get('/ingresorutas' ,(req,res) =>{
-    res.render('ingresorutas.ejs');
 
-});
 
 module.exports = router;
