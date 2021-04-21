@@ -486,13 +486,27 @@ router.get('/correcto', (req,res,next) => {
     
 });
 });
-router.post('/mostrar/:ID',(req, res,next) => {
+router.post('/modificarruta/:ID',(req, res,next) => {
     if(req.isAuthenticated()) return next();
     res.redirect('/login');
 },(req,res,err) =>{
     const {Estado,Nombre,Descripcion,Material_visual}=datitos=req.body;
     const {ID} = req.params;
     conn.query('UPDATE rutas SET? WHERE ID=?',[datitos,req.params.ID],(err,resp,campos) =>{
+        if(!err) {
+            res.redirect('/correcto');
+          } else {
+            console.log(err);
+          }
+    });
+});
+router.post('/modificarpunto/:ID',(req, res,next) => {
+    if(req.isAuthenticated()) return next();
+    res.redirect('/login');
+},(req,res,err) =>{
+    const {Nombre,Coord_X,Coord_Y,Descripcion,Icono,Direccion}=datitos=req.body;
+    const {ID,Numero_punto} = req.params;
+    conn.query('UPDATE Puntos_turisticos SET? WHERE ID=? and Numero_punto=?',[datitos,req.params.ID,req.params.Numero_punto],(err,resp,campos) =>{
         if(!err) {
             res.redirect('/correcto');
           } else {
