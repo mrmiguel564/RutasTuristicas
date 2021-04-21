@@ -163,12 +163,7 @@ router.post('/login',passport.authenticate('local',{
     failureRedirect: "/login"
 }));
 
-router.get('/correcto', (req,res,next)=>{
-    if(req.isAuthenticated()) return next();   
-    res.redirect('/login');
-},(req,res) =>{
-    res.render('admin.ejs');
-});
+
 
 module.exports = router;
 router.get('/modificarCompras/:id_compra', (req,res,next) => {
@@ -426,7 +421,7 @@ router.post('/ingresorutas',(req, res,next) => {
                 var sql = 'insert into puntos_turisticos(ID,Numero_punto,Coord_x,Coord_y,Nombre,Descripcion,Icono,Direccion) VALUES ?';
                 const {Numero_punto,Coord_x,Coord_y,NombreP,DescripcionP,Icono,Direccion}=req.body;
                 var values=[];
-                for(var i=0;i<Coord_x.length;i++){
+                for(var i=0;i<Numero_punto.length;i++){
                     values.push([resp.insertId,Numero_punto[i],Coord_x[i],Coord_y[i],NombreP[i],DescripcionP[i],Icono[i],Direccion[i]])
                 };
                 console.log(values);
@@ -449,7 +444,65 @@ router.post('/ingresorutas',(req, res,next) => {
 });
 });
 
+router.get('/correcto', (req,res,next) => {
+    if(req.isAuthenticated()) return next();
+    res.redirect('/login');
+},(req,res) =>{
+    //res.render('index.ejs');
+    conn.query('Select ID, Nombre, Estado, Descripcion, Material_visual FROM rutas', (err,resp,campos) => {
+            
+            res.render('admin.ejs'
+            ,{
+            datos : resp
+            
+            });
+            console.log(resp);
 
+        });
+    
+
+
+    });
+    router.get('/modificar/:ID', (req,res,next)=>{
+        if(req.isAuthenticated()) return next();
+        res.redirect('/login');
+    },(req,res) => {
+        //res.render('index.ejs');
+        const { ID } = req.params;
+        conn.query('Select * from rutas Where ID=?', [ID] , (err,resp,campos) => {
+            console.log(resp);
+            if(!err){
+            conn.query('Select * from puntos_turisticos WHERE ID=?',[ID],(err,resp1,campos)=>{
+                console.log(resp1);
+            res.render('Modifcar.ejs',{
+                datos: resp,datos1:resp1
+            });
+            console.log(resp)
+        });
+            }else{
+                console.log(err);
+            }
+        
+    
+});
+});
+    router.get('/delete/:ID',(req,res,next)=>{
+        if(req.isAuthenticated()) return next();
+        res.redirect('/login');
+    },(req,res)=> {
+        const { ID } = req.params;
+        conn.query('DELETE FROM rutas WHERE ID=?',[ID],(err,resp,campos)=>{
+            console.log(resp);
+            if(!err){
+                conn.query('DELETE FROM puntos_turisticos WHERE ID=?',[ID],(err,resp,campos) =>{
+                    
+                });
+                res.redirect('/correcto');
+            }else{
+                console.log(err);
+            }
+            });
+        });
 
 /* router.post('/ingresa/sucursal',(req, res, next) => {
 

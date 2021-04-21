@@ -110,17 +110,7 @@ ul li {
                 
               
 
-        <div style=display:none>
-        <div class="Puntos1" >
-          <input name="Numero_punto" type="text" placeholder="Numero del punto"><br>
-          <input name="Coord_x" type="text" placeholder="Coordenada X del punto"><br>
-          <input name="Coord_y" type="text" placeholder="Coordenada Y del punto"><br>
-          <input name="NombreP" type="text" placeholder="Nombre del punto"><br>
-          <input name="DescripcionP" type="text" placeholder="Descripcion"><br>
-          <input name="Icono" type="text" placeholder="Icono"><br>
-          <input name="Direccion" type="text" placeholder="Direccion"><br><br>
-        </div>
-      </div>
+        
     
 
 
@@ -132,7 +122,7 @@ ul li {
    button.addEventListener('click', function(event) {
       event.stopPropagation();
       event.preventDefault();
-      var cln = document.getElementsByClassName("Puntos1")[0].cloneNode(true);
+      var cln = document.getElementsByClassName("Puntos")[0].cloneNode(true);
       document.getElementById("Puntos").insertBefore(cln,this);
       return false;
    });

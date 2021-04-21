@@ -18,7 +18,8 @@
 
 <div class="w3-bar-block">
   <a class="w3-button w3-hover-teal w3-hide-large w3-large w3-right" href="javascript:void(0)" onclick="w3_close()">×</a>
-  <a class="w3-bar-item w3-button w3-border-bottom w3-large" href="/admin">Administracion</a>
+  <a class="w3-bar-item w3-button" href="/">Inicio</a>
+  <a class="w3-bar-item w3-button w3-border-bottom w3-large" href="/correcto">Administracion</a>
   <a class="w3-bar-item w3-button" href="/Ingresorutas">Ingreso rutas</a>
 
 </div>
@@ -35,7 +36,7 @@
 <!-- header  -->
 
 <header class="w3-container w3-blue w3-padding-32 w3-center">
-  <a href="/"><h1 class="w3-xxxlarge w3-padding-16 w3-black" >Administracion Turismo SA </h1></a>
+  <a href="/correcto"><h1 class="w3-xxxlarge w3-padding-16 w3-black" >Administracion Turismo SA </h1></a>
 </header>
 
 
@@ -51,45 +52,42 @@
     
     <br>
 
-     <div class=' w3-striped'>
-        <h2 class="w3-section">Instrucciones: </h2>
-        <p>1.- En la parte superior izquierda se podra encontrar con los productos, personas y compras, para añadir actualizar y modificar</p>
-        <p>2.- En el caso de compras usted no añade compras pero si puede modificarse si lo amerita </p>
-        <p>3.- dentro de esta pagina usted puede ver tambien los pedidos de las personas que tienen en el carrito de compras junto con su correo</p>
-        <p>4.- En esta pagina tambien se pueden visualizar el mayor precio que tiene especicacion, tambien el menor y el promedio de los productos que tienen especificación</p>
-        <p>IMPORTANTE: LO QUE SE MUESTRA EN ESTO NO TIENE QUE VER CON LAS COMPRAS ORIGINALES YA QUE ESTAS SON COMPRAS QUE ESTAN SIENDO PROCESADAS EN EL MOMENTO NO LAS HECHAS</p>
-      </div>
-    </div>
-    <div class='col-md-6 mt-4'>
-      <table class="w3-table-all w3-centered w3-card-4">
-          <h3>Rutas Activas</h3>
-           <tr class="w3-blue">
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Estado</th>
-                <th>Descripcion</th>
-                <th>Visual</th>
-            </tr>
-
-             
-         </table>        
-        </div>
+     
 
 
+        <div class='col'>
+          <div class='col-md-1 mt-4 '>
+              <table class='w3-table-all w3-centered w3-card-4'>
+                  <tr class="w3-blue">  
+                    <th>Estado</th>                    
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Descripcion</th>
+                    <th>Visual</th>
+                    <th>Informacion De Puntos</th>
+                    <th>Eliminar</th>
+                    <th>Modificar</th>
+                    
+                  </tr>
+                  <% for(var i = 0; i < datos.length; i++){ %>
+                     <tr>
+                         <td><%= datos[i].Estado %></td>
+                         <td><%= datos[i].ID %> </td>
+                         <td><%= datos[i].Nombre %></td>
+                         <td><%= datos[i].Descripcion %></td>
+                         <td><%= datos[i].Material_visual %></td>
+                         <td><a class="btn btn-outline-info" href="/puntost/<%= datos[i].ID %>" role="button">Ver Puntos</a></td>
+                         <td><a class="btn btn-outline-info" href="/delete/<%= datos[i].ID %>" role="button">Eliminar</a></td>
+                         <td><a class="btn btn-outline-info" href="/modificar/<%= datos[i].ID %>" role="button">Modificar</a></td>
+                         
+                     </tr> 
+                  <% } %>
+              </table>
+              
+          </div>
 
 
-    <div class='col-md-6 mt-4 w3-striped '>
-      <table class="w3-table-all w3-centered w3-card-4">
-        <h3>Rutas no activas</h3>
-        <tr class="w3-blue">                    
-          <th>ID</th>
-          <th>Nombre</th>
-          <th>Estado</th>
-          <th>Descripcion</th>
-          <th>Visual</th>
-        </tr>
-         
-      </table> 
+    
      
     </div>
 
