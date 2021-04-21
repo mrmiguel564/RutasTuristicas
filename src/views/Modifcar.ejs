@@ -59,7 +59,7 @@
                     <th>Visual</th>
                     <th></th>
                   </tr>
-                  <form action="/mostrar/<%= datos[0].ID %>" method="post">
+                  <form action="/modificarruta/<%= datos[0].ID %>" method="post">
                       <tr>
                       <td><%= datos[0].ID %> <% i %></td>
                       <td class="w3-container w3-left-align"> <input type="radio" id="Estado" name="Estado" <% if(datos[0].Estado == "Activa")    {%>checked<% } %> value="1">   <label for="male">activo</label>         <br>
@@ -92,17 +92,18 @@
                       <th>Direccion</th>
                       
                     </tr>
-                    <form action="/mostrar/<%= datos[0].ID %>" method="post"></form>
+                    
                     <% for(var i = 0; i < datos1.length; i++){ %>
-                       <tr>
-                           <td><%= datos1[i].Numero_punto %></td>
-                           <td><%= datos1[i].Nombre %> </td>
-                           <td><%= datos1[i].Coord_X %></td>
-                           <td><%= datos1[i].Coord_Y %></td>
-                           <td><%= datos1[i].Descripcion %></td>
-                           <td><%= datos1[i].Icono %></td>
-                           <td><%= datos1[i].Direccion %></td>
-                       </tr> 
+                      <form action="/modificarpunto/<%= datos[0].ID %>,<%= datos[0].ID %>" method="post">
+                      <tr><td><%= datos1[i].Numero_punto %></td>
+                      <td><input id="<td><input id="Nombre" type="text" class="form-control" value="<%= datos1[i].Nombre %>" name="Nombre" placeholder="Nombre del Punto"></td>
+                      <td><input id="Coord_X" type="text" class="form-control" value="<%= datos1[i].Coord_X %>" name="Coord_X" placeholder="latitud"></td>
+                      <td><input id="Coord_Y" type="text" class="form-control" value="<%= datos1[i].Coord_Y %>" name="Coord_Y" placeholder="latitud"></td>
+                      <td><input id="Descripcion" type="text" class="form-control" value="<%= datos1[i].Descripcion %>" name="Descripcion" placeholder="Descripcion"></td>
+                      <td><input id="Icono" type="text" class="form-control" value="<%= datos1[i].Icono %>" name="Icono" placeholder="Icono"></td> 
+                      <td><input id="Direccion" type="text" class="form-control" value="<%= datos1[i].Direccion %>" name="Direccion" placeholder="Direccion"></td> 
+                      <td><input type="submit" value="Actualizar" href="/correcto"></td>
+                      </tr> </form>
                     <% } %>
                 </table>
             </div>
