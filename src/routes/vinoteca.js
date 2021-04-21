@@ -486,6 +486,20 @@ router.get('/correcto', (req,res,next) => {
     
 });
 });
+router.post('/mostrar/:ID',(req, res,next) => {
+    if(req.isAuthenticated()) return next();
+    res.redirect('/login');
+},(req,res,err) =>{
+    const {Estado,Nombre,Descripcion,Material_visual}=datitos=req.body;
+    const {ID} = req.params;
+    conn.query('UPDATE rutas SET? WHERE ID=?',[datitos,req.params.ID],(err,resp,campos) =>{
+        if(!err) {
+            res.redirect('/correcto');
+          } else {
+            console.log(err);
+          }
+    });
+});
     router.get('/delete/:ID',(req,res,next)=>{
         if(req.isAuthenticated()) return next();
         res.redirect('/login');
@@ -503,6 +517,8 @@ router.get('/correcto', (req,res,next) => {
             }
             });
         });
+       
+    
 
 /* router.post('/ingresa/sucursal',(req, res, next) => {
 
