@@ -126,7 +126,7 @@
              <div class="w3-col w3-container" style="max-width:300px;max-height:300px;">
               <div class="w3-card-4 w3-center" onclick="Mostrar_popup(<%=rutas[i].ID%>,<%=CenterX%>,<%=CenterY%>)">
                 <div class="w3-content w3-hover-opacity">
-                  <img style="max-width:autopx; height:autopx" src="https://maps.googleapis.com/maps/api/staticmap?center=<%=CenterX%>,<%=CenterY%>&zoom=13&size=250x250&maptype=roadmap
+                  <img style="max-width:autopx; height:autopx" src="https://maps.googleapis.com/maps/api/staticmap?center=<%=CenterX%>,<%=CenterY%>&size=250x250&maptype=roadmap
                   <% for(var j = 0; j < puntos.length; j++){if(puntos[j].ID==rutas[i].ID){ %>
                     &markers=color:red%7Clabel: <%=puntos[j].Numero_punto%> %7C<%=puntos[j].Coord_X%>, <%=puntos[j].Coord_Y%>
                     <% }} %>
