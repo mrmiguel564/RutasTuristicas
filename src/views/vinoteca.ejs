@@ -102,7 +102,7 @@
       </div>
       </div>
     </div>
-
+    
             <!-- Product grid -->
 
     <div class="container w3-center" >
@@ -122,9 +122,10 @@
                 CenterY = CenterY/count;
             %>
 
-         
+            
              <div class="w3-col w3-container" style="max-width:300px;max-height:300px;">
-              <div class="w3-card-4 w3-center" onclick="Mostrar_popup(<%=rutas[i].ID%>,<%=CenterX%>,<%=CenterY%>)">
+              
+              <div class="w3-card-4 w3-center" onclick="Mostrar_popup(<%=rutas[i].ID%>)">
                 <div class="w3-content w3-hover-opacity">
                   <img style="max-width:autopx; height:autopx" src="https://maps.googleapis.com/maps/api/staticmap?center=<%=CenterX%>,<%=CenterY%>&size=250x250&maptype=roadmap
                   <% for(var j = 0; j < puntos.length; j++){if(puntos[j].ID==rutas[i].ID){ %>
@@ -167,37 +168,55 @@
   
  
   <script>
-    function Mostrar_popup(ID,X,Y) {
-      var puntos = puntos;
-      var lista = new Array();
-      for(punto in puntos){
-        if(punto == ID){
-          lista.push(punto);
-        }
-      }
-     
-      document.getElementById('popup').style.display='block'
-      document.getElementById('map').center.lat=X
-      document.getElementById('map').center.lng=Y
+
+  
+  
+  
+
+   let map;
+ 
+    function Mostrar_popup(ID) {
       
+           var a = '<%- JSON.stringify(puntos)%>'; 
+           var puntos = JSON.parse(a);
+           
+      console.log(ID);
+      document.getElementById('popup').style.display='block'
+     
+/*    document.getElementById('map').center.lat=X
+      document.getElementById('map').center.lng=Y */
+      
+      console.log(puntos);
+       for(var k = 0; k < puntos.length; k++){
+       if(puntos[k].ID==ID){ 
+          console.log("entre");
+          const myLatLng = { lat: puntos[k].Coord_X, lng: puntos[k].Coord_Y };
+          new google.maps.Marker({ position: myLatLng, map,   title: "Hello World!",  });
+             }
+      } 
+
+      console.log(map);
+
     }
 
 
     function Cerrar_popup() {
-
+      /* borrar weas */
       document.getElementById('popup').style.display='none'
+      
     }
  
-    let map;
+    
 
     function initMap(X, Y) {
-      var marker = new google.maps.Marker({position: [-33.5809,-71.6132]});
-      marker.setMap(map);
+     /*  var marker = new google.maps.Marker({position: [-33.5809,-71.6132]}); */
+   /*    marker.setMap(map); */
       map = new google.maps.Map(document.getElementById("map"), {
         center: { lat: -33.5809, lng: -71.6132 },     /* aqui debemos meter center x, y y ademas meter los marcadores esa es nuestra mision las weas estan en la BD pero nuestra mission es sacar desde alli */
         zoom: 14,
       });
-      marker.setMap(map);
+   /*    marker.setMap(map); */
+      console.log(map);
     }
     
 
@@ -242,7 +261,7 @@ function showDivs(n) {
   
     
     // Click on the "Jeans" link on page load to open the accordion for demo purposes
-    document.getElementById("myBtn").click();
+   
 
     // Open and close sidebar
     function w3_open() {
@@ -270,8 +289,7 @@ function showDivs(n) {
       evt.currentTarget.className += " w3-theme-dark";
     }
 
-    var mybtn = document.getElementsByClassName("testbtn")[0];
-    mybtn.click();
+ 
 
 
   </script>
