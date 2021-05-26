@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html>
-<title>Rutas Turisticas SAN ANTONIO</title>
+<html><title>Rutas Turisticas SAN ANTONIO</title> 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -65,13 +64,13 @@
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#">Inicio <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="/A">Inicio <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/ingresorutas">Ingresar Rutas</a>
+          <a class="nav-link" href="/ingresorutasA">Ingresar Rutas</a>
         </li>
       </ul>
-      <a class="navbar-brand" href="/login">Iniciar Sesion</a>
+      <a class="navbar-brand" href="/correcto">Administracion</a>
 
 
   </div>
@@ -126,9 +125,6 @@
              <div class="w3-col w3-container" style="max-width:300px;max-height:300px;">
               
               <div class="w3-card-4 w3-center" onclick="Mostrar_popup(<%=rutas[i].ID%>)">
-                <% var id=rutas[i].ID;
-                  
-                %>
                 <div class="w3-content w3-hover-opacity">
                   <img style="max-width:autopx; height:autopx" src="https://maps.googleapis.com/maps/api/staticmap?center=<%=CenterX%>,<%=CenterY%>&size=250x250&maptype=roadmap
                   <% for(var j = 0; j < puntos.length; j++){if(puntos[j].ID==rutas[i].ID){ %>
@@ -159,29 +155,10 @@
         <div class="w3-container w3-white w3-center">
           <i onclick="Cerrar_popup()" class="fa fa-remove w3-right w3-button w3-transparent w3-xlarge"></i>
             <!-- APPI MAPS HERE -->
-          <div class="row">
-          <div class="col-sm-4" id="map">
+          <div id="map">
           <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCeqP9RawiuGlNjM1d94-DiyJ7gYdf88Gc&callback=initMap&libraries=&v=weekly"
           async
         ></script></div>
-
-        <div class="col-sm-8">
-          <% for(var p = 0; p < rutas.length; p++){
-            console.log(id);
-            console.log(rutas[p].Material_visual);
-            if(rutas[p].ID==id){%>
-              <h2 id="Ruta">test</h2>
-              <img id="Visual" src="<%=rutas[p].Material_visual %>" width="550" height="200">
-              <h4 id="Descripcion">test</h4>
-          <%}%>
-         
-          
-          
-          <%}%>
-            
-        </div>
-      </div>
-        
         </div> 
       </div>
     </div>
@@ -201,20 +178,10 @@
       
            var a = '<%- JSON.stringify(puntos)%>'; 
            var puntos = JSON.parse(a);
-           var id=ID;
+           
       console.log(ID);
-
       document.getElementById('popup').style.display='block'
-          var b = '<%- JSON.stringify(rutas)%>'; 
-           var rutas = JSON.parse(b);
-      for(var j=0;j<rutas.length;j++){
-        if(rutas[j].ID==ID){
-          var info = rutas[j]
-        }
-      }
-      document.getElementById('Ruta').innerHTML=info.Nombre
-      document.getElementById('Descripcion').innerHTML=info.Descripcion
-      document.getElementById('Visual').innerHTML=info.Material_visual
+     
 /*    document.getElementById('map').center.lat=X
       document.getElementById('map').center.lng=Y */
       

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<title>Turismo SA</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-teal.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style type="text/css">
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+ul li {
+  list-style: none;
+}
+
+
+</style>
+<body>
+
+<div class="w3-sidebar w3-collapse w3-white w3-animate-left w3-large" style="z-index:3;width:300px;" id="mySidebar">
+
+<div class="w3-bar w3-black w3-center">
+  <a class="w3-bar-item w3-button" style="width:33.33%" href="javascript:void(0)" onclick="openNav('nav01')">
+  <i class="fa fa-bars w3-xlarge"></i></a>
+
+</div>
+
+<div class="w3-bar-block">
+  
+  <a class="w3-button w3-hover-teal w3-hide-large w3-large w3-right" href="javascript:void(0)" onclick="w3_close()">×</a>
+  <a class="w3-bar-item w3-button w3-border-bottom w3-large" href="/A">Inicio</a>
+  <a class="w3-bar-item w3-button w3-border-bottom w3-large" href="/correcto">Administracion</a>
+
+</div>
+</div>
+<!-- UwU -->
+
+<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" id="myOverlay"></div>
+
+<div class="w3-main" style="margin-left:300px;"> 
+
+<div class="w3-top w3-theme w3-large w3-hide-large">
+  <i class="fa fa-bars w3-button w3-teal w3-xlarge" onclick="w3_open()"></i>
+</div>
+<!-- header  -->
+
+<header class="w3-container w3-blue w3-padding-32 w3-center">
+
+  <a href="/ingresorutas"><h1 class="w3-xxxlarge w3-padding-16 w3-black" >Turismo SA </h1></a>
+</header>
+
+
+
+
+<div class='col-md-6 mt-4'>
+
+  
+
+    
+    
+    <br>
+
+     <div class=' w3-striped'>
+      <h2 class="w3-section">Instrucciones: </h2>
+      <p>1.- Hacer relleno de el formulario de ingreso</p>
+      <p>2.- Despues del ingreso sera redireccionad@ a el ingreso de puntos turisticos </p>
+      <p>IMPORTANTE: LA RUTA Y LOS PUNTOS TURISTICOS RECOMENDADOS SERAN ACEPTADOS O NO,  POR EL ADMINISTRADOR </p>
+      </div>
+    </div>
+    
+    <div class='col-md-6 mt-4'>
+
+      <form id="Puntos" action="/ingresorutas" method="post">
+        <input name="Nombre" type="text" placeholder="Nombre ruta"><br>
+          <input name="Descripcion" type="text" placeholder="Descripcion"><br>
+          <input name="Material_visual" type="text" placeholder="Icono"><br><br>
+        <div class="Puntos">
+          <input name="Numero_punto" type="text" placeholder="Numero del punto"><br>
+          <input name="Coord_x" type="text" placeholder="Coordenada X del punto"><br>
+          <input name="Coord_y" type="text" placeholder="Coordenada Y del punto"><br>
+          <input name="NombreP" type="text" placeholder="Nombre del punto"><br>
+          <input name="DescripcionP" type="text" placeholder="Descripcion"><br>
+          <input name="Icono" type="text" placeholder="Icono"><br>
+          <input name="Direccion" type="text" placeholder="Direccion"><br><br>
+        </div>
+          <button id='add-puntos'>Agregar Mas puntos</button><br><br>
+          <input type="submit" href="/ingresorutasA">   
+       </form>
+
+        </div>
+        <br></br>
+        <div class="container w3-center" >
+          <div class="row">
+    
+          
+                 <div class="w3-col w3-container" style="max-width:210px;max-height:300px;">
+                  <div class="w3-hide-small w3-card-4 w3-center">
+                    <div class="w3-hide-small w3-display-container w3-hover-opacity">
+                      
+
+
+                    </div>
+                  </div>
+                </div>
+          </div>  
+        </div>
+
+                
+              
+
+        
+    
+
+
+
+
+<script>
+  (function() {
+   var button=document.getElementById("add-puntos");
+   button.addEventListener('click', function(event) {
+      event.stopPropagation();
+      event.preventDefault();
+      var cln = document.getElementsByClassName("Puntos")[0].cloneNode(true);
+      document.getElementById("Puntos").insertBefore(cln,this);
+      return false;
+   });
+})();
+
+
+
+
+    function Mostrar_popup(ID) {
+      var puntos = puntos;
+      var lista = new Array();
+      for(punto in puntos){
+        if(punto == ID){
+          
+          lista.push(punto);
+
+        }
+      }
+
+      
+      document.getElementById('popup').style.display='block'
+
+    }
+
+
+    function Cerrar_popup() {
+
+      document.getElementById('popup').style.display='none'
+    }
+function w3_open() {
+  document.getElementById("mySidebar").style.display = "block";
+  document.getElementById("myOverlay").style.display = "block";
+}
+
+function w3_close() {
+  document.getElementById("mySidebar").style.display = "none";
+  document.getElementById("myOverlay").style.display = "none";
+}
+
+openNav("nav01");
+function openNav(id) {
+  document.getElementById("nav01").style.display = "none";
+  document.getElementById("nav02").style.display = "none";
+  document.getElementById("nav03").style.display = "none";
+  document.getElementById(id).style.display = "block";
+}
+
+</script>
+
+<script src="https://www.w3schools.com/lib/w3codecolor.js"></script>
+
+<script>
+w3CodeColor();
+</script>
+
+</body>
+</html> 
