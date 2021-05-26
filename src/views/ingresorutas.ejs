@@ -11,7 +11,10 @@ ul {
   padding: 0;
   margin: 0;
 }
-
+#map {
+	height: 500px;
+	width: 100%;
+}
 ul li {
   list-style: none;
 }
@@ -68,14 +71,23 @@ ul li {
       <p>2.- Despues del ingreso sera redireccionad@ a el ingreso de puntos turisticos </p>
       <p>IMPORTANTE: LA RUTA Y LOS PUNTOS TURISTICOS RECOMENDADOS SERAN ACEPTADOS O NO,  POR EL ADMINISTRADOR </p>
       </div>
+      <div class="row">
+        <div class="col-sm-4" id="map">
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCeqP9RawiuGlNjM1d94-DiyJ7gYdf88Gc&callback=initMap&libraries=&v=weekly"
+        async
+      ></script></div></div>
     </div>
     
     <div class='col-md-6 mt-4'>
-
-      <form id="Puntos" action="/ingresorutas" method="post">
+      <div class="input-group">
+        
+        
+      
+      <form id="Puntos" action="/ingresorutas" method="post" class="card-body" enctype="multipart/form-data">
         <input name="Nombre" type="text" placeholder="Nombre ruta"><br>
           <input name="Descripcion" type="text" placeholder="Descripcion"><br>
-          <input name="Material_visual" type="text" placeholder="Icono"><br><br>
+          <input type="file"  name="Material_visual">
+          <br><br>
         <div class="Puntos">
           <input name="Numero_punto" type="text" placeholder="Numero del punto"><br>
           <input name="Coord_x" type="text" placeholder="Coordenada X del punto"><br>
@@ -88,7 +100,7 @@ ul li {
           <button id='add-puntos'>Agregar Mas puntos</button><br><br>
           <input type="submit" href="/ingresorutas">   
        </form>
-
+      </div>
         </div>
         <br></br>
         <div class="container w3-center" >
@@ -117,6 +129,28 @@ ul li {
 
 
 <script>
+  let map;
+   let markers = [];
+   function initMap() {   
+      map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: -33.5809, lng: -71.6132 },     /* aqui debemos meter center x, y y ademas meter los marcadores esa es nuestra mision las weas estan en la BD pero nuestra mission es sacar desde alli */
+        zoom: 14,
+      });
+      map.addListener("click", (event) => {
+    addMarker(event.latLng);
+  });
+  // Adds a marker at the center of the map.
+  addMarker(haightAshbury);
+  
+}
+
+function addMarker(location) {
+  const marker = new google.maps.Marker({
+    position: location,
+    map: map,
+  });
+  markers.push(marker);
+}
   (function() {
    var button=document.getElementById("add-puntos");
    button.addEventListener('click', function(event) {

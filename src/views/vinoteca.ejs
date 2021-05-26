@@ -3,11 +3,13 @@
 <title>Rutas Turisticas SAN ANTONIO</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -68,10 +70,10 @@
           <a class="nav-link" href="#">Inicio <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/ingresorutas">Ingresar Rutas</a>
+          <a class="nav-link" href="/ingresorutas">ayudanos a agregar mas rutas</a>
         </li>
       </ul>
-      <a class="navbar-brand" href="/login">Iniciar Sesion</a>
+      <a class="navbar-brand" href="/login"> Iniciar Sesion</a>
 
 
   </div>
@@ -157,15 +159,15 @@
           <i onclick="Cerrar_popup()" class="fa fa-remove w3-right w3-button w3-transparent w3-xlarge"></i>
             <!-- APPI MAPS HERE -->
           <div class="row">
-          <div class="col-sm-4" id="map">
+          <div id="map">
           <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCeqP9RawiuGlNjM1d94-DiyJ7gYdf88Gc&callback=initMap&libraries=&v=weekly"
           async
         ></script></div>
 
-        <div class="col-sm-8">
+        <div>
 
               <h2 id="Ruta">test</h2>
-              <img id="Visual" src="icono3.jpg" width="550" height="200">
+              <img id="Visual" src="icono3.jpg" width="autopx" height="autopx">
               <h4 id="Descripcion">test</h4>
         </div>
       </div>
@@ -184,6 +186,7 @@
   
 
    let map;
+   let markers = [];
  
     function Mostrar_popup(ID) {
       
@@ -216,10 +219,18 @@
       } 
 
       console.log(map);
-
+      
     }
-
-
+    function clearMarkers() {
+  setMapOnAll(null);
+}
+    function deleteMarkers() {
+  clearMarkers();
+  markers = [];
+}
+function showMarkers() {
+  setMapOnAll(map);
+}
     function Cerrar_popup() {
       /* borrar weas */
       document.getElementById('popup').style.display='none'
@@ -228,17 +239,26 @@
  
     
 
-    function initMap(X, Y) {
-     /*  var marker = new google.maps.Marker({position: [-33.5809,-71.6132]}); */
-   /*    marker.setMap(map); */
+    function initMap() {   
       map = new google.maps.Map(document.getElementById("map"), {
         center: { lat: -33.5809, lng: -71.6132 },     /* aqui debemos meter center x, y y ademas meter los marcadores esa es nuestra mision las weas estan en la BD pero nuestra mission es sacar desde alli */
         zoom: 14,
       });
-   /*    marker.setMap(map); */
-      console.log(map);
-    }
-    
+      map.addListener("click", (event) => {
+    addMarker(event.latLng);
+  });
+  // Adds a marker at the center of the map.
+  addMarker(haightAshbury);
+  
+}
+
+function addMarker(location) {
+  const marker = new google.maps.Marker({
+    position: location,
+    map: map,
+  });
+  markers.push(marker);
+}
 
 
      

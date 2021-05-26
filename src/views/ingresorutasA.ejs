@@ -72,11 +72,11 @@ ul li {
     </div>
     
     <div class='col-md-6 mt-4'>
-
-      <form id="Puntos" action="/ingresorutas" method="post">
+      <div class="input-group">
+      <form id="Puntos" action="/ingresorutas" method="post" class="card-body" enctype="multipart/form-data">
         <input name="Nombre" type="text" placeholder="Nombre ruta"><br>
           <input name="Descripcion" type="text" placeholder="Descripcion"><br>
-          <input name="Material_visual" type="text" placeholder="Icono"><br><br>
+          <input type="file"  name="Material_visual"><br><br>
         <div class="Puntos">
           <input name="Numero_punto" type="text" placeholder="Numero del punto"><br>
           <input name="Coord_x" type="text" placeholder="Coordenada X del punto"><br>
@@ -87,9 +87,10 @@ ul li {
           <input name="Direccion" type="text" placeholder="Direccion"><br><br>
         </div>
           <button id='add-puntos'>Agregar Mas puntos</button><br><br>
-          <input type="submit" href="/ingresorutasA">   
+          <input type="submit" class="btn btn-primary" value="Confirmar" > 
+          <a type="button" class="btn btn-default" href="/ingresorutasA >Anular/Cancelar</a>  
        </form>
-
+      </div>
         </div>
         <br></br>
         <div class="container w3-center" >
@@ -118,6 +119,7 @@ ul li {
 
 
 <script>
+  
   (function() {
    var button=document.getElementById("add-puntos");
    button.addEventListener('click', function(event) {

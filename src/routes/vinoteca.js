@@ -345,7 +345,7 @@ router.post('/ingresa/rutas', (req, res,next) => {
         nombre: nombre,
         Estado: Estado,
         descripcion : descripcion,
-        jpg         : req.files[0].filename,
+        Material_visual        : req.files[0].filename,
     
     }, (err, result) => {
         if(!err) {
@@ -423,7 +423,7 @@ router.post('/ingresorutas',(req, res,next) => {
     conn.query('insert into rutas SET?',{
         Nombre:Nombre,
         Descripcion:Descripcion,
-        Material_visual:Material_visual
+        Material_visual:req.files[0].filename,
     },(err,resp,campos) =>{
         if(!err) {
             
@@ -472,16 +472,18 @@ router.get('/ingresorutasA', (req,res,next)=>{
 });
 router.post('/ingresorutasA',(req, res,next) => {
     const {Nombre,Descripcion,Material_visual}=req.body;
+    console.log(req.body);
+    console.log(req.files.filename);
     conn.query('insert into rutas SET?',{
         Nombre:Nombre,
         Descripcion:Descripcion,
-        Material_visual:Material_visual
+        Material_visual : req.files[0].filename,
     },(err,resp,campos) =>{
         if(!err) {
             
 
                 console.log(resp);
-                console.log("xddd");
+                console.log("rutas A");
                 console.log(resp.insertId);
                 var sql = 'insert into puntos_turisticos(ID,Numero_punto,Coord_x,Coord_y,Nombre,Descripcion,Icono,Direccion) VALUES ?';
                 const {Numero_punto,Coord_x,Coord_y,NombreP,DescripcionP,Icono,Direccion}=req.body;

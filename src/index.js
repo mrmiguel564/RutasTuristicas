@@ -29,7 +29,7 @@ app.use(multer({
  //    fileFilter: (req, file, cb)=>{
   //   const filetype = /jpeg|jpg|png|gif/;
   //   }
-}).any('jpg'));
+}).any('Material_visual'));
 app.use(express.static(path.join(__dirname, "imagen") ));
 app.use(express.urlencoded({ extended: true}))
 app.use(express.json()); //Transfomar a formato JSON 
